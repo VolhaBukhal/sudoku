@@ -10,27 +10,30 @@ module.exports = function solveSudoku(matrix) {
   // put number one by one to empty place
   for (let i = 1; i <= 9; i++) {
     const curNum = i;
+    // console.log('curNum: ', curNum);
     const row = curPos[0];
     const col = curPos[1];
     const valid = isValid(curNum, row, col, matrix);
+    // console.log('row, col: ', row, col);
     if( valid ) {
       matrix[row][col] = curNum;
       if(solveSudoku(matrix)) {
-        return true;
-      } else {
-        matrix[row][col] = 0;
-      }
+        return matrix;
+      } 
+      matrix[row][col] = 0;
+    
     }
   }
 
   function isEmpty(matrix) {
     let pos = [];
-    debugger;
+    // debugger;
     for(let i = 0; i < 9; i++) {
       for(let j = 0; j < 9; j++) {
         if(matrix[i][j] == 0) {
           pos.push(i);
           pos.push(j);
+          // console.log(pos);
           return pos;
         }
        }
@@ -66,7 +69,7 @@ module.exports = function solveSudoku(matrix) {
      }
    }
    return true;
- }
+  }
 
- return matrix;
+ return false;
 }
